@@ -389,7 +389,34 @@ FROM Worker W
 
 JOIN Title T ON W.WORKER_ID = T.WORKER_REF_ID
 WHERE T.WORKER_TITLE = 'Manager';
+CREATE TABLE Student (
+    sno INT PRIMARY KEY,
+    sname VARCHAR(20),
+    age INT
+);
 
+INSERT INTO Student (sno, sname, age) VALUES
+    (1, 'Ankit', 17),
+    (2, 'Ramya', 18),
+    (3, 'Ram', 16);
+
+CREATE TABLE Course (
+    cno INT PRIMARY KEY,
+    cname VARCHAR(20)
+);
+DROP TABLE IF EXISTS Enroll;
+CREATE TABLE Enroll (
+    sno INT,
+    cno INT,
+    jdate DATE,
+    PRIMARY KEY (sno, cno),
+    FOREIGN KEY (sno) REFERENCES Student(sno) ON DELETE CASCADE,
+    FOREIGN KEY (cno) REFERENCES Course(cno) ON DELETE CASCADE
+);
+INSERT INTO Enroll (sno, cno, jdate)
+VALUES (1, 101, '2021-05-05');
+SELECT * FROM Enroll;
+DESC Enroll;
 
 
 
